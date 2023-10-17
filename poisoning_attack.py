@@ -207,7 +207,7 @@ if __name__ == '__main__':
     parser.add_argument('--setup', type=str, default='within')
     parser.add_argument('--target_label', type=int, default=1)
     parser.add_argument('--pr', type=float, default=0.05, help='poison_rate')
-    parser.add_argument('--baseline', type=bool, default=False, help='is baseline')
+    parser.add_argument('--baseline', type=bool, default=True, help='is baseline')
 
     args = parser.parse_args()
 
@@ -228,6 +228,9 @@ if __name__ == '__main__':
         os.makedirs(log_path)
     log_name = os.path.join(log_path,
                             f'{args.setup}_{args.dataset}_{args.model}.log')
+    if args.baseline:
+        npz_name = npz_name.replace('.npz', '_baseline.npz')
+        log_name = log_name.replace('.log', '_baseline.log')
 
     # logging
     logger = logging.getLogger()

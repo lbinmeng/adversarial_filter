@@ -162,7 +162,7 @@ def train(x: torch.Tensor, y: torch.Tensor, x_val: torch.Tensor, y_val: torch.Te
     plt.close()    
 
 
-    return test_acc, test_bca, adv_test_acc, adv_test_bca, adv_filter_layer.filter.data.cpu().numpy()
+    return test_acc, test_bca, adv_test_acc, adv_test_bca, best_filter.filter.data.cpu().numpy()
 
 
 def eval(filter_layer: nn.Module, model: nn.Module, criterion: nn.Module, data_loader: DataLoader):
@@ -198,9 +198,9 @@ def adjust_learning_rate(optimizer: nn.Module, epoch: int, args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Model train')
-    parser.add_argument('--gpu_id', type=str, default='7')
+    parser.add_argument('--gpu_id', type=str, default='1')
     parser.add_argument('--model', type=str, default='EEGNet')
-    parser.add_argument('--dataset', type=str, default='MI4C')
+    parser.add_argument('--dataset', type=str, default='ERN')
 
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--epochs', type=int, default=50)
